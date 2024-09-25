@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main class="container">
+
+        <h3  class="text-center">Черновой проезд</h3>
+
+        <span>Дата проезда: {{ payment.date }}</span>
+
+        <h4 class="text-center">Дороги</h4>
+
+        <div class="cards-wrapper d-flex flex-column">
+
+            {% for road in roads %}
+
+                {% include "road_card.html" %}
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+{% endblock content %}
