@@ -4,18 +4,20 @@
 {% block content %}
     <main class="container">
 
-        <h3  class="text-center">Черновой проезд</h3>
+        <h3 class="text-center">Проезд</h3>
 
-        <span>Дата проезда: {{ payment.date }}</span>
+        <div class="info-block">
+            <span>Дата проезда: {{ payment.date }}</span><br>
+            <span>Время суток: {{ payment.time_of_day }}</span><br>
+            <span>Номер машины: {{ payment.car_number }}</span>
+        </div>
 
         <h4 class="text-center">Дороги</h4>
 
         <div class="cards-wrapper d-flex flex-column">
 
             {% for road in roads %}
-
                 {% include "road_card.html" %}
-
             {% endfor %}
 
         </div>

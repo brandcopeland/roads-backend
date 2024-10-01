@@ -153,6 +153,7 @@ main {
 .card-btns {
     display: flex;
     justify-content: center;
+    
 }
 
 .card-btns .btn {
@@ -207,4 +208,31 @@ main {
     background-color: var(--bin-bg--hover) !important;
     border-color: var(--bin-border--hover) !important;
     color: var(--bin-color--hover) !important;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+/* Flexbox layout for the distance input fields */
+.form-group .d-flex {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+/* Style for the labels inside the input group */
+.form-group span {
+    margin-right: 5px; /* Space between label and input */
+    font-weight: bold;  /* Bold text for visibility */
+}
+
+/* Style for the distance input fields */
+.form-group .form-control {
+    width: 75px;  /* Fixed width for inputs */
+    margin-right: 5px; /* Space between input fields */
+}
+
+/* Additional margin for the last input to avoid extra space on the right */
+.form-group .form-control:last-child {
+    margin-right: 0; /* Remove margin from the last input */
 }

@@ -10,12 +10,19 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ road.name }} </h5>
                     <p class="card-text">Разрешенная скорость: {{ road.speed }} км/ч</p>
+                    
                     <div class="form-group">
-                        <label class="form-label">Расстояние (км)</label>
-                        <input disabled class="form-control" style="width: 150px" value="{{ road.value }}">
+                        <label class="form-label">Участок дороги (км)</label>
+                        <div class="d-flex align-items-center">
+                            <span class="me-2">с</span>
+                            <input type="text" class="form-control me-2" style="width: 75px;" value="{{ road.start_value }}" disabled>
+                            <span class="me-2">по</span>
+                            <input type="text" class="form-control" style="width: 75px;" value="{{ road.end_value }}" disabled>
+                        </div>
                     </div>
-                    <a href="/roads/{{ road.id }}/" class="btn btn-primary" style="width: 100px">
-                        Открыть
+                    
+                    <a href="/roads/{{ road.id }}/" class="btn btn-primary" style="width: 153px">
+                        Подробнее
                     </a>
                 </div>
             </div>
@@ -29,9 +36,9 @@
                 <h5 class="card-title">{{ road.name }}</h5>
                 <p class="card-text">Разрешенная скорость: {{ road.speed }} км/ч</p>
             </div>
-            <div class="card-btns">
-                <a href="/roads/{{ road.id }}/" class="btn btn-primary center">
-                    Открыть
+            <div class="card-btns"  style="background-color: #fff;">
+                <a href="/roads/{{ road.id }}/" class="btn btn-primary center" style="width: 153px">
+                    Подробнее
                 </a>
             </div>
         </div>

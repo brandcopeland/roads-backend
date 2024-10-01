@@ -45,22 +45,30 @@ roads = [
     }
 ]
 
-draft_payment = {
+payments = {
     "id": 123,
     "status": "Черновик",
     "date_created": "12 сентября 2024г",
     "date": "28 сентября 2024г",
+    "car_number":"А777АА777",
+    "time_of_day":"День",
     "roads": [
         {
             "id": 1,
+            "start_value":130,
+            "end_value":280,
             "value": 150
         },
         {
             "id": 2,
+            "start_value":30,
+            "end_value":230,
             "value": 200
         },
         {
             "id": 3,
+            "start_value":0,
+            "end_value":150,
             "value": 150
         }
     ]
@@ -87,24 +95,24 @@ def searchRoads(road_name):
     return res
 
 
-def getDraftPayment():
-    return draft_payment
+def getPayments():
+    return payments
 
 
 def getPaymentById(payment_id):
-    return draft_payment
+    return payments
 
 
 def index(request):
     road_name = request.GET.get("road_name", "")
     roads = searchRoads(road_name) if road_name else getRoads()
-    draft_payment = getDraftPayment()
+    payments = getPayments()
 
     context = {
         "roads": roads,
         "road_name": road_name,
-        "roads_count": len(draft_payment["roads"]),
-        "draft_payment": draft_payment
+        "roads_count": len(payments["roads"]),
+        "payments": payments
     }
 
     return render(request, "home_page.html", context)
@@ -122,7 +130,7 @@ def road(request, road_id):
 def payment(request, payment_id):
     payment = getPaymentById(payment_id)
     roads = [
-        {**getRoadById(road["id"]), "value": road["value"]}
+        {**getRoadById(road["id"]), "value": road["value"], "start_value": road["start_value"],"end_value": road["end_value"]}
         for road in payment["roads"]
     ]
 
