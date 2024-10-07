@@ -16,6 +16,16 @@
 
                 <span>Разрешенная скорость: {{ road.speed }}</span>
 
+                <div class="form-group">
+                    <label class="form-label">Участок дороги (км)</label>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2">с</span>
+                        <input type="text" class="form-control me-2" style="width: 75px;" value="{{ road.start_value }}" disabled>
+                        <span class="me-2">по</span>
+                        <input type="text" class="form-control" style="width: 75px;" value="{{ road.end_value }}" disabled>
+                    </div>
+                </div>
+
                 <a href="/" class="btn btn-primary my-4 w-25 return-btn">
                     Домой
                 </a>
