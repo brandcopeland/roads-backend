@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main class="container">
+
+        <div class="row">
+            <div class="col-6">
+                <img src="{{ road.get_image }}" class="road-image" alt=""/>
+            </div>
+            <div class="col-6 d-flex flex-md-column gap-md-3">
+
+                <h1>{{ road.name }}</h1>
+
+                <span>Описание: {{ road.description }}</span>
+
+                <span>Разрешенная скорость: {{ road.speed }}км/ч</span>
+
+                <span>Участок дороги (км): с <input type="text" style="width:40px;text-align: center;" value="{{ road.start }}" disabled> по <input type="text" style="width:40px" value="{{ road.end }}" disabled></span>
+
+                <a href="/" class="return-btn btn btn-primary my-4 w-25">
+                    Назад
+                </a>
+
+            </div>
+        </div>
+
+    </main>
+{% endblock content %}

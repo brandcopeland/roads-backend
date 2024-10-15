@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <main class="container">
+
+        <h3  class="text-center">Проезд</h3>
+
+         <div class="form-group">
+            <label class="form-label">Дата проезда</label>
+            {% if payment.date %}
+                <input placeholder="Введите дату проезда" disabled type="text" class="form-control" style="width: 250px" value="{{ payment.date }}">
+            {% else %}
+                <input placeholder="Введите дату проезда" disabled type="text" class="form-control" style="width: 250px">
+            {% endif %}
+        </div>
+
+         <div class="form-group">
+            <label class="form-label">Номер машины</label>
+            {% if payment.number %}
+                <input placeholder="Введите номер машины" disabled type="text" class="form-control" style="width: 250px" value="{{ payment.number }}">
+            {% else %}
+                <input placeholder="Введите номер машины" disabled type="text" class="form-control" style="width: 250px">
+            {% endif %}
+        </div>
+
+        <form method="post" action="{% url 'delete_payment' payment.id %}">
+            {% csrf_token %}
+                <button class="btn btn-danger delete-draft-payment-btn" type="submit">
+                    Удалить
+                </button>
+            </a>
+        </form>
+
+        <h4 class="text-center">Дороги</h4>
+
+        <div class="cards-wrapper d-flex flex-column">
+
+            {% for road in payment.get_roads %}
+
+                {% include "road_card.html" %}
+
+            {% endfor %}
+
+        </div>
+
+    </main>
+{% endblock content %}
