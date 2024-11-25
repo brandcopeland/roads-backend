@@ -10,3 +10,4 @@ drf-yasg==1.21.7
 django-redis==5.4.0
 minio
 setuptools
+django-cors-headers

@@ -59,8 +59,8 @@ def search_roads(request):
     return Response(resp)
 
 
-@api_view(["GET"])
-def get_road_by_id(request, road_id):
+# @api_view(["GET"])
+# def get_road_by_id(request, road_id):
     if not Road.objects.filter(pk=road_id).exists():
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -68,6 +68,40 @@ def get_road_by_id(request, road_id):
     serializer = RoadSerializer(road)
 
     return Response(serializer.data)
+
+from django.db import connection
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+
+
+@api_view(["GET"])
+def get_road_by_id(request, road_id):
+    # Выполнение SQL-запроса напрямую
+    with connection.cursor() as cursor:
+        cursor.execute("""
+            SELECT *
+            FROM public.roads
+            WHERE id = %s
+        """, [road_id])
+        row = cursor.fetchone()
+
+    # Проверка на существование дороги
+    if not row:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    # Подготовка ответа
+    road_data = {
+        "id": row[0],
+        "name": row[1],
+        "description": row[2],
+        "status": row[3],
+        "image": "http://localhost:9000/images/"+row[4] if row[4] else "http://localhost:9000/images/default.png",
+        "speed": row[5],
+        "start": row[6],
+        "end": row[7],
+    }
+    return Response(road_data, status=status.HTTP_200_OK)
 
 
 @api_view(["PUT"])

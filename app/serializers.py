@@ -8,9 +8,17 @@ class RoadsSerializer(serializers.ModelSerializer):
 
     def get_image(self, road):
         if road.image:
-            return road.image.url.replace("minio", "localhost", 1)
+            # Получить URL изображения
+            url = road.image.url.replace("minio", "localhost", 1)
 
+            # Найти начало параметров запроса (знак '?') и обрезать их
+            url_without_params = url.split('?')[0]
+
+            return url_without_params
+
+        # Вернуть ссылку на изображение по умолчанию
         return "http://localhost:9000/images/default.png"
+
 
     class Meta:
         model = Road
@@ -18,15 +26,28 @@ class RoadsSerializer(serializers.ModelSerializer):
 
 
 class RoadSerializer(serializers.ModelSerializer):
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, road):
+        if road.image:
+            # Получить URL изображения
+            url = road.image.url.replace("minio", "localhost", 1)
+
+            # Найти начало параметров запроса (знак '?') и обрезать их
+            url_without_params = url.split('?')[0]
+
+            return url_without_params
+
+
     class Meta:
         model = Road
         fields = ['name', 'description', 'status', 'image', 'speed', 'start', 'end']
-    
+
     def validate_start(self, value):
         if value is None:
             raise serializers.ValidationError("Поле 'start' обязательно для заполнения.")
         return value
-    
+
     def validate_end(self, value):
         if value is None:
             raise serializers.ValidationError("Поле 'end' обязательно для заполнения.")
